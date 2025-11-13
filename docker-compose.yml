@@ -1,0 +1,68 @@
+services:
+  db:
+    image: postgres:16
+    container_name: odoo18_db
+    environment:
+      - POSTGRES_DB=odoo
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    restart: unless-stopped
+ 
+  odoo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: odoo18_app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo
+    volumes:
+      # Odoo configuration
+      - ./odoo.conf:/etc/odoo/odoo.conf:rw
+      
+      # Addon directories
+      - ./odoo_core:/mnt/odoo-core:rw
+      - ./odoo_base_addons:/mnt/base-addons:rw
+      - ./test_odoo18/enterprise:/mnt/enterprise-addons:rw
+      - ./test_odoo18/custom_addons:/mnt/custom-addons:rw
+      - ./filestore:/var/lib/odoo/.local/share/Odoo/filestore:rwproject-floors
+      - ./sessions:/var/lib/odoo/.local/share/Odoo/sessions
+ 
+      # Data directories
+      - ./odoo_logs:/var/log/odoo:rw
+    ports:
+      - "8069:8069"
+      - "8072:8072"
+    restart: unless-stopped
+ 
+  mailcatcher:
+    image: schickling/mailcatcher
+    container_name: odoo18_mailcatcher
+    ports:
+      - "1080:1080"
+      - "1025:1025"
+    restart: unless-stopped
+ 
+volumes:
+  db_data:
+  filestore:
+  odoo_logs:
+ 
+networks:
+  default:
+    name: odoo18-network

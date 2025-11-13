@@ -1,0 +1,153 @@
+RPC_ERROR
+
+Odoo Server Error
+
+Occured on 51.68.214.208:8071 on model mail.compose.message on 2025-11-06 09:14:49 GMT
+
+Traceback (most recent call last):
+  File "<2048>", line 32, in template_2048
+  File "<2048>", line 11, in template_2048_content
+AttributeError: 'sale.order' object has no attribute 'picking_type_code'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/odoo/http.py", line 2123, in _transactioning
+    return service_model.retrying(func, env=self.env)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/service/model.py", line 156, in retrying
+    result = func()
+             ^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/http.py", line 2090, in _serve_ir_http
+    response = self.dispatcher.dispatch(rule.endpoint, args)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/http.py", line 2338, in dispatch
+    result = self.request.registry['ir.http']._dispatch(endpoint)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_http.py", line 333, in _dispatch
+    result = endpoint(**request.params)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/http.py", line 754, in route_wrapper
+    result = endpoint(self, *args, **params_ok)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/web/controllers/dataset.py", line 36, in call_kw
+    return call_kw(request.env[model], method, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/api.py", line 533, in call_kw
+    result = getattr(recs, name)(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/web/models/models.py", line 1019, in onchange
+    snapshot1 = RecordSnapshot(record, fields_spec)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/web/models/models.py", line 1106, in __init__
+    self.fetch(name)
+  File "/usr/lib/python3/dist-packages/odoo/addons/web/models/models.py", line 1115, in fetch
+    lines = self.record[field_name]
+            ~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/models.py", line 7061, in __getitem__
+    return self._fields[key].__get__(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/fields.py", line 3059, in __get__
+    return super().__get__(records, owner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/fields.py", line 1236, in __get__
+    self.recompute(record)
+  File "/usr/lib/python3/dist-packages/odoo/fields.py", line 1463, in recompute
+    apply_except_missing(self.compute_value, recs)
+  File "/usr/lib/python3/dist-packages/odoo/fields.py", line 1436, in apply_except_missing
+    func(records)
+  File "/usr/lib/python3/dist-packages/odoo/fields.py", line 1485, in compute_value
+    records._compute_field_value(self)
+  File "/usr/lib/python3/dist-packages/odoo/addons/mail/wizard/mail_compose_message.py", line 633, in _compute_field_value
+    return super(MailComposer, self.with_context(prefetch_fields=False))._compute_field_value(field)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/models.py", line 5280, in _compute_field_value
+    fields.determine(field.compute, self)
+  File "/usr/lib/python3/dist-packages/odoo/fields.py", line 110, in determine
+    return needle(*args)
+           ^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/mail/wizard/mail_compose_message.py", line 259, in _compute_attachment_ids
+    rendered_values = composer._generate_template_for_composer(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/mail/wizard/mail_compose_message.py", line 1302, in _generate_template_for_composer
+    template_values = self.template_id._generate_template(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/mail/models/mail_template.py", line 567, in _generate_template
+    template._generate_template_attachments(
+  File "/usr/lib/python3/dist-packages/odoo/addons/mail/models/mail_template.py", line 297, in _generate_template_attachments
+    report_content, report_format = self.env['ir.actions.report']._render_qweb_pdf(report, [res_id])
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_actions_report.py", line 1012, in _render_qweb_pdf
+    collected_streams, report_type = self._pre_render_qweb_pdf(report_ref, res_ids=res_ids, data=data)
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/account/models/ir_actions_report.py", line 75, in _pre_render_qweb_pdf
+    return super()._pre_render_qweb_pdf(report_ref, res_ids=res_ids, data=data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_actions_report.py", line 1003, in _pre_render_qweb_pdf
+    return self._render_qweb_pdf_prepare_streams(report_ref, data, res_ids=res_ids), 'pdf'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/sale_pdf_quote_builder/models/ir_actions_report.py", line 17, in _render_qweb_pdf_prepare_streams
+    result = super()._render_qweb_pdf_prepare_streams(report_ref, data, res_ids=res_ids)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/enterprise/account_followup/models/ir_actions_report.py", line 12, in _render_qweb_pdf_prepare_streams
+    res = super()._render_qweb_pdf_prepare_streams(report_ref, data, res_ids)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/purchase/models/ir_actions_report.py", line 12, in _render_qweb_pdf_prepare_streams
+    collected_streams = super()._render_qweb_pdf_prepare_streams(report_ref, data, res_ids=res_ids)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/account_edi_ubl_cii/models/ir_actions_report.py", line 11, in _render_qweb_pdf_prepare_streams
+    collected_streams = super()._render_qweb_pdf_prepare_streams(report_ref, data, res_ids)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/account_edi/models/ir_actions_report.py", line 14, in _render_qweb_pdf_prepare_streams
+    collected_streams = super()._render_qweb_pdf_prepare_streams(report_ref, data, res_ids=res_ids)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/account/models/ir_actions_report.py", line 22, in _render_qweb_pdf_prepare_streams
+    return super()._render_qweb_pdf_prepare_streams(report_ref, data, res_ids=res_ids)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_actions_report.py", line 853, in _render_qweb_pdf_prepare_streams
+    html = self.with_context(**additional_context)._render_qweb_html(report_ref, all_res_ids_wo_stream, data=data)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_actions_report.py", line 1091, in _render_qweb_html
+    return self._render_template(report.report_name, data), 'html'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_actions_report.py", line 769, in _render_template
+    return view_obj._render_template(template, values).encode()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_ui_view.py", line 2199, in _render_template
+    return self.env['ir.qweb']._render(template, values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/tools/profiler.py", line 313, in _tracked_method_render
+    return method_render(self, template, values, **options)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/odoo/addons/base/models/ir_qweb.py", line 606, in _render
+    result = ''.join(rendering)
+             ^^^^^^^^^^^^^^^^^^
+  File "<1282>", line 34, in template_1282
+  File "<1282>", line 23, in template_1282_content
+  File "<1281>", line 80, in template_1281
+  File "<1281>", line 62, in template_1281_content
+  File "<1281>", line 50, in template_1281_t_call_0
+  File "<1280>", line 1217, in template_1280
+  File "<1280>", line 1206, in template_1280_content
+  File "<208>", line 97, in template_208
+  File "<208>", line 72, in template_208_content
+  File "<2029>", line 431, in template_2029
+  File "<2029>", line 344, in template_2029_content
+  File "<2048>", line 40, in template_2048
+odoo.addons.base.models.ir_qweb.QWebException: Error while render the template
+AttributeError: 'sale.order' object has no attribute 'picking_type_code'
+Template: sale_extend.report_deliveryslip_terms_condition
+Path: /t/t/div/t
+Node: <t t-raw="o.company_id.invoice_terms"/>
+
+The above server error caused the following client error:
+OwlError: An error occured in the owl lifecycle (see this Error's "cause" property)
+    Error: An error occured in the owl lifecycle (see this Error's "cause" property)
+        at handleError (http://51.68.214.208:8071/web/assets/43ea577/web.assets_web.min.js:972:101)
+        at App.handleError (http://51.68.214.208:8071/web/assets/43ea577/web.assets_web.min.js:1619:29)
+        at ComponentNode.initiateRender (http://51.68.214.208:8071/web/assets/43ea577/web.assets_web.min.js:1064:19)
+
+Caused by: RPC_ERROR: Odoo Server Error
+    RPC_ERROR
+        at makeErrorFromResponse (http://51.68.214.208:8071/web/assets/43ea577/web.assets_web.min.js:3148:163)
+        at XMLHttpRequest.<anonymous> (http://51.68.214.208:8071/web/assets/43ea577/web.assets_web.min.js:3153:13)
